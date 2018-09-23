@@ -1,8 +1,7 @@
-import { LoggingService } from "./logging.service";
 import { Injectable } from "@angular/core";
+import { LoggingService } from "./logging.service";
 
 @Injectable({providedIn: 'root',})
-
 export class AccountService {
 
   accounts = [
@@ -19,17 +18,18 @@ export class AccountService {
       status: 'unknown'
     }
   ];
-    constructor(private loggerSerice: LoggingService) {
 
-    }
+  constructor(private loggerSerice: LoggingService) {
 
-    
+  }
 
-      addAcount(name: string, status: string) {
-        this.accounts.push({name: name, status: status });
-      }
+  addAcount(name: string, status: string) {
+    this.accounts.push({name: name, status: status });
+    this.loggerSerice.logStatusChange(status);
+  }
 
-      updateStatus(id: number, status: string) {
-        this.accounts[id].status = status;
-      }
+  updateStatus(id: number, status: string) {
+    this.accounts[id].status = status;
+    this.loggerSerice.logStatusChange(status);
+  }
 }
